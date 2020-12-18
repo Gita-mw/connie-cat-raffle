@@ -1,0 +1,457 @@
+// font
+$font-en: 'Staatliches', sans-serif;
+
+// colors
+$color-txt: #333;
+$color-blue: #7fd1fb;
+$color-red: #ec4343;
+$color-yellow: #fff791;
+@mixin color-gradient {
+  background-image: -webkit-linear-gradient(330deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: -o-linear-gradient(330deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+// -- sns
+$color-facebook: #3b5998;
+$color-twitter: #55acee;
+$color-google: #dd4b39;
+$color-hatena: #008fde;
+$color-line: #00b900;
+
+// original
+
+// breakpoint
+// -- custum point
+@mixin break-ctm($range1, $value1, $range2: false, $value2: false) {
+  @if $range2 == false and $value2 == false {
+    @media screen and (#{$range1}-width:$value1) {
+      @content;
+    }
+  } @else {
+    @media screen and (#{$range1}-width:$value1) and (#{$range2}-width:$value2) {
+      @content;
+    }
+  }
+}
+
+// -- two point
+@mixin break-pc {
+  //pcのみ
+  @media screen and (min-width: 601px) {
+    @content;
+  }
+}
+@mixin break-sp {
+  //spのみ
+  @media screen and (max-width: 600px) {
+    @content;
+  }
+}
+
+// -- three point
+//pcのみ
+//@mixin break-pc {
+//	@media screen and (min-width:961px) {
+//		@content;
+//	}
+//}
+//pcとtab共通
+//@mixin break-pc-tab {
+//	@media screen and (min-width:601) {
+//		@content;
+//	}
+//}
+//tabとsp共通
+//@mixin break-tab-sp {
+//	@media screen and (max-width:960px) {
+//		@content;
+//	}
+//}
+//tabのみ
+//@mixin break-tab {
+//	@media screen and (max-width:960px) and (min-width:601px) {
+//		@content;
+//	}
+//}
+//spのみ
+//@mixin break-sp {
+//	@media screen and (max-width:600px) {
+//		@content;
+//	}
+//}
+
+// --.browser point
+@mixin break-ie {
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    @content;
+  }
+}
+@mixin break-firefox {
+  @-moz-document url-prefix() {
+    @content;
+  }
+}
+// -- slope point
+@mixin break-landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+@mixin break-portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+// layout
+@mixin wrap($width: 90%) {
+  width: $width;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+@mixin clear {
+  clear: both;
+  content: "";
+  display: block;
+  height: 0;
+}
+@mixin sizes($width: auto, $height: auto) {
+  width: $width;
+  height: $height;
+}
+
+// font
+//font awesome ver4
+@mixin icon($content: "", $fs: inherit, $fc: inherit, $position: true) {
+  content: $content;
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-size: $fs;
+  color: $fc;
+  @if $position == true {
+    position: absolute;
+  }
+}
+//font awesome ver5
+@mixin icon-free(
+  $content: "",
+  $fs: inherit,
+  $fw: 400,
+  $fc: inherit,
+  $position: true
+) {
+  content: $content;
+  font-family: "Font Awesome 5 Free";
+  font-weight: $fw;
+  font-size: $fs;
+  color: $fc;
+  @if $position == true {
+    position: absolute;
+  }
+}
+@mixin icon-brands($content: "", $fs: inherit, $fc: inherit, $position: true) {
+  content: $content;
+  font-family: "Font Awesome 5 Brands";
+  font-weight: 400;
+  font-size: $fs;
+  color: $fc;
+  @if $position == true {
+    position: absolute;
+  }
+}
+@mixin font-fset {
+  -webkit-font-feature-settings: "pkna" 1;
+  font-feature-settings: "pkna" 1;
+}
+@mixin font-roboto($fs, $fw: 400, $fc: inherit) {
+  font-family: "roboto";
+  font-style: normal;
+  font-weight: $fw;
+  font-size: $fs;
+  color: $fc;
+}
+@mixin font-cabin($fs, $fw: 400, $fc: inherit) {
+  font-family: "cabin";
+  font-style: normal;
+  font-weight: $fw;
+  font-size: $fs;
+  color: $fc;
+}
+@mixin letter($space) {
+  letter-spacing: ($space/1000) * 1em;
+}
+@mixin overflow-line {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+@mixin overflow-lines($clamp, $lh: 1.5) {
+  line-height: $lh;
+  max-height: $clamp * $lh * 1em;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $clamp;
+}
+@mixin marker($maker-color, $maker-position: 50%) {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop($maker-position, transparent),
+    color-stop($maker-position, $maker-color)
+  );
+  background: -webkit-linear-gradient(
+    transparent $maker-position,
+    $maker-color $maker-position
+  );
+  background: -o-linear-gradient(
+    transparent $maker-position,
+    $maker-color $maker-position
+  );
+  background: linear-gradient(
+    transparent $maker-position,
+    $maker-color $maker-position
+  );
+}
+@mixin write($mode: v) {
+  @if $mode == v {
+    -webkit-writing-mode: lr-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb;
+  } @else if $moie == h {
+    -webkit-writing-mode: lr-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb;
+  }
+}
+
+// img
+@mixin fluid-img {
+  max-width: 100%;
+  height: auto;
+}
+@mixin fitting-cover {
+  -o-object-fit: cover;
+  object-fit: cover;
+  font-family: "object-fit: cover;";
+}
+@mixin fitting-contain {
+  -o-object-fit: contain;
+  object-fit: contain;
+  font-family: "object-fit: contain;";
+}
+@mixin img-shadow($value) {
+  -webkit-filter: drop-shadow($value);
+  filter: drop-shadow($value);
+}
+
+// hover
+@mixin hover-scale($scale: 1.2, $time: 0.5) {
+  overflow: hidden;
+  img {
+    transition: transform #{$time}s ease-out;
+  }
+  &:hover {
+    text-decoration: none;
+    img {
+      opacity: 1;
+      -webkit-transform: scale($scale);
+      -ms-transform: scale($scale);
+      transform: scale($scale);
+    }
+  }
+}
+
+// form
+@mixin placeholder {
+  &:placeholder-shown {
+    @content;
+  }
+  // Google Chrome, Safari, Opera 15+, Android, iOS
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  // Firefox 18-
+  &:-moz-placeholder {
+    opacity: 1;
+    @content;
+  }
+  // Firefox 19+
+  &::-moz-placeholder {
+    opacity: 1;
+    @content;
+  }
+  // IE 10+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// other
+@mixin br($status) {
+  br {
+    display: $status;
+  }
+}
+@mixin first-margin($mt: 0) {
+  > :first-child {
+    margin-top: $mt;
+  }
+}
+@mixin close-rotate {
+  &:after {
+    transition: all 0.2s;
+  }
+  &.close {
+    &:after {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+      transition: all 0.4s;
+    }
+  }
+}
+@mixin centering($position: fale) {
+  // value v or h only
+  @if $position == v {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  } @else if $position == h {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  } @else {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+}
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -ms-transform: $value;
+  transform: $value;
+}
+
+// animation
+@mixin animation($name, $duration, $function, $delay, $count, $state) {
+  -webkit-animation: $name $duration + s $function $delay + s $count $state;
+  animation: $name $duration + s $function $delay + s $count $state;
+}
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+// flex
+@mixin flex($inline: false) {
+  @if $inline == inline {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  } @else {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+@mixin flex-wrap($value: wrap) {
+  -ms-flex-wrap: $value;
+  flex-wrap: $value;
+}
+@mixin flex-dir($value: row) {
+  @if $value == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+  } @else if $value == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+  } @else if $value == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+  }
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
+@mixin flex-jc($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  justify-content: $value;
+}
+@mixin flex-ai($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  align-items: $value;
+}
+@mixin flex-ac($value: stretch) {
+  @if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else if $value == space-between {
+    -ms-flex-line-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-line-pack: distribute;
+  } @else {
+    -ms-flex-line-pack: $value;
+  }
+  align-content: $value;
+}
+@mixin flex-order($num: 0) {
+  -webkit-box-ordinal-group: $num + 1;
+  -ms-flex-order: $num;
+  order: $num;
+}
+@mixin flex-as($value: auto) {
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else if $value == baseline {
+    -ms-flex-item-align: $value;
+  } @else {
+    -ms-flex-item-align: $value;
+    -ms-grid-row-align: $value;
+  }
+  align-self: $value;
+}

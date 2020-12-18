@@ -1,0 +1,103 @@
+/*
+**
+page style
+** index
+**
+**
+form style
+**
+**
+**
+system style
+**
+**
+**
+*/
+
+/*==================================================
+
+** common
+==================================================*/
+
+/* floatbox */
+#main {
+  .floatbox {
+    &:after {
+      @include clear;
+    }
+    .txtbox,
+    .photobox {
+      @include first-margin;
+      &.right {
+        float: right;
+      }
+      &.left {
+        float: left;
+      }
+    }
+  }
+}
+
+/*==================================================
+
+** index
+==================================================*/
+
+input,
+textarea,
+select {
+  outline: none;
+}
+.lottery {
+  margin: 40px 0;
+  padding: 10%;
+  background: #fff;
+  box-shadow: 0 4px 12px 0 rgba(#000, 0.1);
+  &__title {
+    font-family: $font-en;
+    font-size: 5rem;
+    line-height: 1.15;
+    text-align: center;
+    text-transform: uppercase;
+    @include letter(50);
+  }
+  &__descpriton {
+    margin: 8% 0 0;
+    text-align: center;
+    line-height: 1.5;
+  }
+  &__message {
+
+  }
+  &__name {
+    margin-top: 0.15em;
+    font-family: $font-en;
+    font-size: 6rem;
+    line-height: 1;
+    hyphens: auto;
+  }
+  &__btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 8% auto 0;
+    padding: 20px;
+    color: #fff;
+    background: $color-red;
+    font-weight: bold;
+    @include letter(50);
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 1px rgba(#000, 0.2);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 8px 18px 3px rgba(#000, 0.2);
+      transition: box-shadow 0.4s;
+    }
+    &:active {
+      background: darken($color-red, 15%);
+    }
+  }
+}
